@@ -30,11 +30,13 @@ int main(int argc, char **argv)
 		error_message = _strddup("Error: malloc failed");
 		RAISE(error_message, EXIT_FAILURE);
 	}
+	mont_deque->commands = NULL;
 	parse_file_lines(&COMMANDS, argv[1]);
 	status = execute_commands(COMMANDS);
 
 	free_comms(&COMMANDS);
 	free_deque(&DEQUE);
+	free(mont_deque);
 	if (status)
 		return (EXIT_SUCCESS);
 	else

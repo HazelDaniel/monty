@@ -76,6 +76,8 @@ void parse_file_lines(mont_com_t **comm_ptr, char *mont_path)
 		error_message = _strvcat("couldn't read. exiting gracefully", NULL);
 		RAISE(error_message, EXIT_FAILURE);
 	}
+	if (_strlen(buff) == 0)
+		free(buff), buff = NULL;
 	(void)parse_to_commands(comm_ptr, buff);
 	if (close(fd) == -1)
 	{

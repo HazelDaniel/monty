@@ -131,6 +131,8 @@ int parse_to_commands(mont_com_t **comm_ptr, char *string)
 	srch_rpl_newline(&string, "<monty_preserved>\n");
 	parse_list = _splitstr(string, "\n");
 
+	if (!parse_list)
+		return (0);
 	for (i = 0; parse_list[i]; i++)
 		append_com(comm_ptr, parse_list[i]);
 	if (*comm_ptr)
