@@ -17,11 +17,10 @@ void free_str_arr(char **str_arr, int is_dyn)
 		return;
 	for (; str_arr[i]; i++)
 	{
-		free(str_arr[i]);
-		str_arr[i] = NULL;
+		_free_(str_arr[i]);
 	}
 	if (is_dyn)
-		free(str_arr), str_arr = NULL;
+		_free_(str_arr);
 }
 
 /**

@@ -7,7 +7,8 @@
  * @format: the pointer to the current mode
  * Return: int (*x)(char **)
  **/
-int (*get_command(char *command, int *format))(char **args, int *format)
+int (*get_command(char *command, int *format, int lineno))
+(char **args, int *format, int lineno)
 {
 	mont_opcode_t funcs[] = {
 		{ "push", handle_push }, { "pint", handle_pint },
@@ -18,11 +19,11 @@ int (*get_command(char *command, int *format))(char **args, int *format)
 		{ "pchar", handle_pchar }, { "pstr", handle_pstr },
 		{ "rotl", handle_rotl }, { "rotr", handle_rotr },
 		{ "stack", handle_stack }, { "queue", handle_queue },
-		{ NULL, NULL }
+		{0, handle_nop}, { "pop", handle_pop }, { 0, 0 }
 	};
 	int i;
 
-	for (i = 0; funcs[i].name; i++)
+	for (i = 0; funcs[i].f; i++)
 	{
 		if (is_start_str(funcs[i].name, command))
 			break;

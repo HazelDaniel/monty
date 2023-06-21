@@ -40,14 +40,14 @@ void free_comms(mont_com_t **list)
 	{
 		if (current->next == NULL)
 		{
-			free(current->command);
-			free(current);
+			_free_(current->command);
+			_free_(current);
 			*list = NULL;
 			return;
 		}
 		next = current->next;
-		free(current->command);
-		free(current);
+		_free_(current->command);
+		_free_(current);
 		current = next;
 	}
 }
@@ -56,27 +56,28 @@ void format_commands(mont_com_t **list)
 {
 	mont_com_t *current = *list;
 	char *tmp;
-	int last_sent_oc;
+	int last_sent_oc, first_hash_oc;
 
 	if (!current)
 		return;
 
 	while (current)
 	{
+		first_hash_oc = first_oc_of(current->command, '#');
+		if (first_hash_oc != -1)
+			current->command[first_hash_oc] = '\0';
 		if (is_end_str(SENTINEL, current->command))
 		{
 			tmp = _trim(current->command);
 			if (tmp)
 			{
-				free(current->command);
+				_free_(current->command);
 				current->command = tmp;
 			}
 			last_sent_oc = last_oc_of(current->command, SENTINEL[0]);
 			current->command[last_sent_oc] = '\0';
 			if (current->command && _strlen(current->command) == 0)
-			{
-				free(current->command), current->command = NULL;
-			}
+				_free_(current->command);
 		}
 
 		current = current->next;
@@ -122,6 +123,41 @@ int parse_to_commands(mont_com_t **comm_ptr, char *string)
 		format_commands(comm_ptr);
 
 	free_str_arr(parse_list, 1);
-	free(string), string = NULL;
+	_free_(string);
 	return (0);
+}
+
+int execute_commands(mont_com_t *list)
+{
+	mont_com_t *current = list;
+	int format = STACK_MODE, lineno, (*f)(char **, int *, int),
+	status, i;
+	char *error_message, *line_str, *opcode;
+
+	while (current)
+	{
+		lineno++;
+		f = get_command(current->command, &format, lineno);
+		if (f)
+		{
+			status = f(&current->command, &format, lineno);
+			if (!status)
+				return (0);
+		}
+		else
+		{
+			break;
+			line_str = _itoa(lineno);
+			opcode = _strddup(current->command);
+			i = last_spn_oc(is_word, opcode);
+			if (i != -1)
+				opcode[i + 1] = '\0';
+
+			error_message = _strvcat("L", line_str, ":", "unknown instruction ", opcode, NULL);
+			_free_(line_str), _free_(opcode);
+			RAISE(error_message, EXIT_FAILURE);
+		}
+		current = current->next;
+	}
+	return (1);
 }

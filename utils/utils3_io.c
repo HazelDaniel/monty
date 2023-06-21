@@ -36,22 +36,8 @@ void parse_file_lines(mont_com_t **comm_ptr, char *mont_path)
 	}
 	if (read_n == -1)
 		puts("error with the read");
-	/*
-	 * since you won't be able to get the correct number
-	 * of lines using this split_str approach,
-	 * first replace all the \n with a sentinel value followed
-	 * by a newline. then split by newline
-	 * then in each string, trim.
-	 * implement a mont_com_t linked list
-	 * FORMATTING:
-		 * convert all the strings to commands of each node in the mont_com_t
-		 * linked list (similar to shell commands only that they don't have separator)
-		 * if the length of the string is more than
-		 * the sentinel
-		 * replace the sentinel with nothing
-	*/
 
-	parse_to_commands(comm_ptr, buff);
+	(void)parse_to_commands(comm_ptr, buff);
 	// fd_str = _itoa(fd);
 	// if (close(fd) != -1)
 	// {

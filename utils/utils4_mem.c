@@ -34,7 +34,7 @@ void *_realloc(void *ptr, size_t old_size, size_t size)
 
 	if (size == 0 && ptr)
 	{
-		free(ptr), ptr = NULL;
+		_free_(ptr), ptr = NULL;
 		return (NULL);
 	}
 	if (ptr == NULL)
@@ -52,7 +52,7 @@ void *_realloc(void *ptr, size_t old_size, size_t size)
 		res = malloc(size);
 		if (res == NULL)
 		{
-			free(ptr), ptr = NULL;
+			_free_(ptr), ptr = NULL;
 			return (res);
 		}
 		res_tmp = res;
@@ -63,7 +63,7 @@ void *_realloc(void *ptr, size_t old_size, size_t size)
 			res_tmp[index] = *ptr_cp++;
 		}
 		--index, res_tmp[index] = '\0';
-		free(ptr), ptr = NULL;
+		_free_(ptr), ptr = NULL;
 	}
 
 	return (res);
