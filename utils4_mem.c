@@ -1,4 +1,4 @@
-#include "../main.h"
+#include "monty.h"
 
 /**
  * _memcpy - copies the content of a pointer

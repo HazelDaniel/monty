@@ -1,4 +1,4 @@
-#include "../main.h"
+#include "monty.h"
 
 /**
 * _strdcat - A function that concatenates two strings

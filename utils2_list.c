@@ -1,4 +1,4 @@
-#include "../main.h"
+#include "monty.h"
 
 /**
  * append_com - a function that appends a command to
@@ -10,7 +10,6 @@
 void append_com(mont_com_t **list, char *command)
 {
 	mont_com_t *new_comm = (mont_com_t *)malloc(sizeof(mont_com_t)), *current;
-	static int id;
 
 	if (!new_comm)
 		return;

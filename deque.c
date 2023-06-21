@@ -69,7 +69,7 @@ deque_t *relocate_deque(deque_t **old_deque_ptr, unsigned int size)
 	if (!old_deque || !new_deque)
 		return (NULL);
 
-	if (!size || size < 0)
+	if (!size)
 		return (old_deque);
 
 	new_deque->deque = malloc((old_deque->size + size) * sizeof(int));

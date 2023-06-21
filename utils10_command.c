@@ -1,4 +1,4 @@
-#include "../main.h"
+#include "monty.h"
 
 /**
  * raise_err - a function that prints

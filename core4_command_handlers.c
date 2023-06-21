@@ -1,4 +1,4 @@
-#include "main.h"
+#include "monty.h"
 
 /**
   * handle_pchar - the function name
@@ -13,6 +13,7 @@ int handle_pchar(char **args, int *format, int lineno)
 	int ascii_char;
 	int i;
 
+	(void)args, (void)format;
 	if (deque_empty(DEQUE))
 	{
 		line_str = _itoa(lineno);
@@ -46,11 +47,12 @@ int handle_pchar(char **args, int *format, int lineno)
  */
 int handle_pstr(char **args, int *format, int lineno)
 {
-	char *error_message, *line_str;
-	int ascii_char, d_len = deque_len(DEQUE), i, x,
+	char *error_message;
+	int d_len = deque_len(DEQUE), i, x,
 	index = 0;
 	char *result;
 
+	(void)args, (void)format, (void)lineno;
 	if (deque_empty(DEQUE))
 		print_deque(DEQUE);
 
@@ -89,6 +91,7 @@ int handle_rotl(char **args, int *format, int lineno)
 {
 	int top;
 
+	(void)args, (void)format, (void)lineno;
 	if (deque_empty(DEQUE))
 		return (1);
 
@@ -109,6 +112,7 @@ int handle_rotr(char **args, int *format, int lineno)
 {
 	int bottom;
 
+	(void)args, (void)format, (void)lineno;
 	if (deque_empty(DEQUE))
 		return (1);
 
@@ -127,6 +131,7 @@ int handle_rotr(char **args, int *format, int lineno)
  */
 int handle_stack(char **args, int *format, int lineno)
 {
+	(void)args, (void)format, (void)lineno;
 	*format = STACK_MODE;
 	return (1);
 }

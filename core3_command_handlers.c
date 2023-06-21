@@ -1,4 +1,4 @@
-#include "main.h"
+#include "monty.h"
 
 /**
   * handle_nop - the function name
@@ -25,6 +25,7 @@ int handle_sub(char **args, int *format, int lineno)
 	int tail, next_tail, result;
 	char *error_message, *line_str;
 
+	(void)args, (void)format;
 	if (deque_len(DEQUE) < 2)
 	{
 		line_str = _itoa(lineno);
@@ -53,6 +54,7 @@ int handle_div(char **args, int *format, int lineno)
 	int tail, next_tail, result;
 	char *error_message, *line_str;
 
+	(void)args, (void)format;
 	if (deque_len(DEQUE) < 2)
 	{
 		line_str = _itoa(lineno);
@@ -89,6 +91,7 @@ int handle_mul(char **args, int *format, int lineno)
 	int tail, next_tail, result;
 	char *error_message, *line_str;
 
+	(void)args, (void)format;
 	if (deque_len(DEQUE) < 2)
 	{
 		line_str = _itoa(lineno);
@@ -117,6 +120,7 @@ int handle_mod(char **args, int *format, int lineno)
 	int tail, next_tail, result;
 	char *error_message, *line_str;
 
+	(void)args, (void)format;
 	if (deque_len(DEQUE) < 2)
 	{
 		line_str = _itoa(lineno);

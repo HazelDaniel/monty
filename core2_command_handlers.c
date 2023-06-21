@@ -1,4 +1,4 @@
-#include "main.h"
+#include "monty.h"
 
 /**
   * handle_push - the function name
@@ -54,6 +54,7 @@ int handle_pint(char **args, int *format, int lineno)
 	char *error_message, *line_str;
 	int i;
 
+	(void)args, (void)format, (void)lineno;
 	if (deque_empty(DEQUE))
 	{
 		line_str = _itoa(lineno);
@@ -77,6 +78,7 @@ int handle_pint(char **args, int *format, int lineno)
  */
 int handle_pall(char **args, int *format, int lineno)
 {
+	(void)args, (void)format, (void)lineno;
 	print_deque(DEQUE);
 	return (1);
 }
@@ -93,6 +95,7 @@ int handle_swap(char **args, int *format, int lineno)
 	int tail, next_tail;
 	char *error_message, *line_str;
 
+	(void)args, (void)format;
 	if (deque_len(DEQUE) < 2)
 	{
 		line_str = _itoa(lineno);
@@ -128,6 +131,7 @@ int handle_add(char **args, int *format, int lineno)
 	int tail, next_tail, result;
 	char *error_message, *line_str;
 
+	(void)args, (void)format;
 	if (deque_len(DEQUE) < 2)
 	{
 		line_str = _itoa(lineno);

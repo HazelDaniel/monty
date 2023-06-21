@@ -1,4 +1,4 @@
-#include "../main.h"
+#include "monty.h"
 
 /**
  * free_str_arr - a function that frees

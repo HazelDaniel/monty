@@ -1,4 +1,4 @@
-#include "main.h"
+#include "monty.h"
 
 /**
  * get_command - a function that gets
@@ -24,6 +24,7 @@ int (*get_command(char *command, int *format, int lineno))
 	};
 	int i;
 
+	(void)format, (void)lineno;
 	for (i = 0; funcs[i].f; i++)
 	{
 		if (is_start_str(funcs[i].name, command))

@@ -1,4 +1,4 @@
-#include "../main.h"
+#include "monty.h"
 
 /**
  * execute_commands - a function that executes

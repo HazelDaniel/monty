@@ -1,4 +1,4 @@
-#include "../main.h"
+#include "monty.h"
 
 /**
   * last_spn_oc - a function that returns the
@@ -35,7 +35,7 @@ int is_num_str(char *str)
 		return (0);
 	if (_strlen(str) > 1 && str[0] == 45)
 		x = 1;
-	if (last_spn_oc(is_digit, str + x) == _strlen(str) - 1)
+	if (last_spn_oc(is_digit, str + x) == (int)_strlen(str) - 1)
 		return (1);
 	return (0);
 }

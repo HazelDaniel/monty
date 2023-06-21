@@ -1,4 +1,4 @@
-#include "main.h"
+#include "monty.h"
 
 /**
   * handle_queue - the function name
@@ -9,6 +9,7 @@
  */
 int handle_queue(char **args, int *format, int lineno)
 {
+	(void)args, (void)format, (void)lineno;
 	*format = QUEUE_MODE;
 	return (1);
 }
@@ -24,6 +25,7 @@ int handle_pop(char **args, int *format, int lineno)
 {
 	char *error_message, *line_str;
 
+	(void)args, (void)format, (void)lineno;
 	if (deque_empty(DEQUE))
 	{
 		line_str = _itoa(lineno);

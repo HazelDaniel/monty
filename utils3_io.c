@@ -1,4 +1,4 @@
-#include "../main.h"
+#include "monty.h"
 
 /**
  * access_or_raise - a function that tries
@@ -14,26 +14,6 @@ static void access_or_raise(char *mont_path, char *msg)
 
 	access_n = access(mont_path, F_OK);
 	if (access_n != 0)
-	{
-		error_message = _strvcat(msg, mont_path, NULL);
-		RAISE(error_message, EXIT_FAILURE);
-	}
-}
-
-/**
- * open_or_raise - a function that tries
- * to open a file and raises an error on failure
- * @mont_path: the path to the monty bytecode
- * @msg: the error message
- * Return: void
- **/
-static void open_or_raise(char *mont_path, char *msg)
-{
-	int fd;
-	char *error_message;
-
-	fd = open(mont_path, O_RDONLY);
-	if (fd == -1)
 	{
 		error_message = _strvcat(msg, mont_path, NULL);
 		RAISE(error_message, EXIT_FAILURE);
@@ -66,9 +46,9 @@ static void alloc_str_or_raise(char *buff)
  **/
 void parse_file_lines(mont_com_t **comm_ptr, char *mont_path)
 {
-	int access_n, read_n, count = 0, i;
+	int read_n, count = 0;
 	ssize_t fd;
-	char *buff = NULL, *fd_str = NULL, *error_message;
+	char *buff = NULL, *error_message;
 
 	if (!mont_path)
 		return;

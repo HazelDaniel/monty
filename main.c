@@ -1,4 +1,4 @@
-#include "main.h"
+#include "monty.h"
 
 mont_stack_t *mont_deque = NULL;
 
@@ -35,5 +35,8 @@ int main(int argc, char **argv)
 
 	free_comms(&COMMANDS);
 	free_deque(&DEQUE);
-	return (EXIT_SUCCESS);
+	if (status)
+		return (EXIT_SUCCESS);
+	else
+		return (EXIT_FAILURE);
 }
