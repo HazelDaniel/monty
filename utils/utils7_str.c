@@ -103,6 +103,12 @@ int is_start_str(char *strsub, char *strsup)
 	return (i == sub_len);
 }
 
+/**
+ * is_digit - a function that checks if a character
+ * is a digit
+ * @c: the input character
+ * Return: int
+ **/
 int is_digit(char c)
 {
 	if (c >= 48 && c <= 57)

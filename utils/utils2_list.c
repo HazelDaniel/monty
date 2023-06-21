@@ -1,5 +1,12 @@
 #include "../main.h"
 
+/**
+ * append_com - a function that appends a command to
+ * the end of a monty command list
+ * @command: the command string
+ * @list: the address of the monty command list
+ * Return: void
+ **/
 void append_com(mont_com_t **list, char *command)
 {
 	mont_com_t *new_comm = (mont_com_t *)malloc(sizeof(mont_com_t)), *current;
@@ -52,6 +59,12 @@ void free_comms(mont_com_t **list)
 	}
 }
 
+/**
+ * format_commands - a function that formats
+ * all command strings in a monty command list
+ * @list: the address of the monty command list
+ * Return: void
+ **/
 void format_commands(mont_com_t **list)
 {
 	mont_com_t *current = *list;
@@ -66,6 +79,8 @@ void format_commands(mont_com_t **list)
 		first_hash_oc = first_oc_of(current->command, '#');
 		if (first_hash_oc != -1)
 			current->command[first_hash_oc] = '\0';
+		if (current->command && _strlen(current->command) == 0)
+			_free_(current->command);
 		if (is_end_str(SENTINEL, current->command))
 		{
 			tmp = _trim(current->command);
@@ -125,39 +140,4 @@ int parse_to_commands(mont_com_t **comm_ptr, char *string)
 	free_str_arr(parse_list, 1);
 	_free_(string);
 	return (0);
-}
-
-int execute_commands(mont_com_t *list)
-{
-	mont_com_t *current = list;
-	int format = STACK_MODE, lineno, (*f)(char **, int *, int),
-	status, i;
-	char *error_message, *line_str, *opcode;
-
-	while (current)
-	{
-		lineno++;
-		f = get_command(current->command, &format, lineno);
-		if (f)
-		{
-			status = f(&current->command, &format, lineno);
-			if (!status)
-				return (0);
-		}
-		else
-		{
-			break;
-			line_str = _itoa(lineno);
-			opcode = _strddup(current->command);
-			i = last_spn_oc(is_word, opcode);
-			if (i != -1)
-				opcode[i + 1] = '\0';
-
-			error_message = _strvcat("L", line_str, ":", "unknown instruction ", opcode, NULL);
-			_free_(line_str), _free_(opcode);
-			RAISE(error_message, EXIT_FAILURE);
-		}
-		current = current->next;
-	}
-	return (1);
 }

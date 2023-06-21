@@ -1,11 +1,25 @@
 #include "main.h"
 
+/**
+  * handle_queue - the function name
+  * @args: parameter of type char **.
+  * @format: parameter of type int *.
+  * @lineno: parameter of type int .
+  * Return: int .
+ */
 int handle_queue(char **args, int *format, int lineno)
 {
 	*format = QUEUE_MODE;
 	return (1);
 }
 
+/**
+  * handle_pop - the function name
+  * @args: parameter of type char **.
+  * @format: parameter of type int *.
+  * @lineno: parameter of type int .
+  * Return: int .
+ */
 int handle_pop(char **args, int *format, int lineno)
 {
 	char *error_message, *line_str;

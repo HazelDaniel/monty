@@ -1,5 +1,12 @@
 #include "main.h"
 
+/**
+  * handle_pchar - the function name
+  * @args: parameter of type char **.
+  * @format: parameter of type int *.
+  * @lineno: parameter of type int .
+  * Return: int .
+ */
 int handle_pchar(char **args, int *format, int lineno)
 {
 	char *error_message, *line_str;
@@ -9,7 +16,8 @@ int handle_pchar(char **args, int *format, int lineno)
 	if (deque_empty(DEQUE))
 	{
 		line_str = _itoa(lineno);
-		error_message = _strvcat("L", line_str, ":", "can't pchar, stack empty", NULL);
+		error_message = _strvcat("L", line_str, ":"
+		, "can't pchar, stack empty", NULL);
 		_free_(line_str);
 		RAISE(error_message, EXIT_FAILURE);
 	}
@@ -19,7 +27,8 @@ int handle_pchar(char **args, int *format, int lineno)
 	if (ascii_char > 127 || ascii_char < 0)
 	{
 		line_str = _itoa(lineno);
-		error_message = _strvcat("L", line_str, ":", "can't pchar, value out of range", NULL);
+		error_message = _strvcat("L", line_str, ":"
+		, "can't pchar, value out of range", NULL);
 		_free_(line_str);
 		RAISE(error_message, EXIT_FAILURE);
 	}
@@ -28,6 +37,13 @@ int handle_pchar(char **args, int *format, int lineno)
 	return (1);
 }
 
+/**
+  * handle_pstr - the function name
+  * @args: parameter of type char **.
+  * @format: parameter of type int *.
+  * @lineno: parameter of type int .
+  * Return: int .
+ */
 int handle_pstr(char **args, int *format, int lineno)
 {
 	char *error_message, *line_str;
@@ -47,7 +63,8 @@ int handle_pstr(char **args, int *format, int lineno)
 	}
 	x = DEQUE->tail;
 	x = (((x - 1) % DEQUE->size) + DEQUE->size) % DEQUE->size;
-	for (i = x; i != DEQUE->head; i = (((i - 1) % DEQUE->size) + DEQUE->size) % DEQUE->size)
+	for (i = x; i != DEQUE->head
+	; i = (((i - 1) % DEQUE->size) + DEQUE->size) % DEQUE->size)
 	{
 		if (DEQUE->deque[i] <= 0 || DEQUE->deque[i] > 127)
 			break;
@@ -61,6 +78,13 @@ int handle_pstr(char **args, int *format, int lineno)
 	return (1);
 }
 
+/**
+  * handle_rotl - the function name
+  * @args: parameter of type char **.
+  * @format: parameter of type int *.
+  * @lineno: parameter of type int .
+  * Return: int .
+ */
 int handle_rotl(char **args, int *format, int lineno)
 {
 	int top;
@@ -74,6 +98,13 @@ int handle_rotl(char **args, int *format, int lineno)
 	return (1);
 }
 
+/**
+  * handle_rotr - the function name
+  * @args: parameter of type char **.
+  * @format: parameter of type int *.
+  * @lineno: parameter of type int .
+  * Return: int .
+ */
 int handle_rotr(char **args, int *format, int lineno)
 {
 	int bottom;
@@ -87,6 +118,13 @@ int handle_rotr(char **args, int *format, int lineno)
 	return (1);
 }
 
+/**
+  * handle_stack - the function name
+  * @args: parameter of type char **.
+  * @format: parameter of type int *.
+  * @lineno: parameter of type int .
+  * Return: int .
+ */
 int handle_stack(char **args, int *format, int lineno)
 {
 	*format = STACK_MODE;

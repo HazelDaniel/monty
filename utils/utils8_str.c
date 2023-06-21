@@ -21,6 +21,12 @@ int last_spn_oc(int (*f)(char c), char *str)
 	return (count);
 }
 
+/**
+ * is_num_str - a function that checks if
+ * a string can be coverted to number
+ * @str: the input string
+ * Return: int
+ **/
 int is_num_str(char *str)
 {
 	int x = 0;

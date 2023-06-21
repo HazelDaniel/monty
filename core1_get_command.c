@@ -5,10 +5,11 @@
  * the matching command for an opcode
  * @command: the raw command
  * @format: the pointer to the current mode
+ * @lineno: the line number
  * Return: int (*x)(char **)
  **/
 int (*get_command(char *command, int *format, int lineno))
-(char **args, int *format, int lineno)
+	(char **args, int *format, int lineno)
 {
 	mont_opcode_t funcs[] = {
 		{ "push", handle_push }, { "pint", handle_pint },
@@ -26,7 +27,10 @@ int (*get_command(char *command, int *format, int lineno))
 	for (i = 0; funcs[i].f; i++)
 	{
 		if (is_start_str(funcs[i].name, command))
-			break;
+		{
+			if (funcs[i].name)
+				break;
+		}
 	}
 	return (funcs[i].f);
 }

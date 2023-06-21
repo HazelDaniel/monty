@@ -1,5 +1,12 @@
 #include "main.h"
 
+/**
+  * handle_push - the function name
+  * @args: parameter of type char **.
+  * @format: parameter of type int *.
+  * @lineno: parameter of type int .
+  * Return: int .
+ */
 int handle_push(char **args, int *format, int lineno)
 {
 	char *push_com = NULL, *push_arg = NULL;
@@ -35,6 +42,13 @@ int handle_push(char **args, int *format, int lineno)
 	return (1);
 }
 
+/**
+  * handle_pint - the function name
+  * @args: parameter of type char **.
+  * @format: parameter of type int *.
+  * @lineno: parameter of type int .
+  * Return: int .
+ */
 int handle_pint(char **args, int *format, int lineno)
 {
 	char *error_message, *line_str;
@@ -43,7 +57,8 @@ int handle_pint(char **args, int *format, int lineno)
 	if (deque_empty(DEQUE))
 	{
 		line_str = _itoa(lineno);
-		error_message = _strvcat("L", line_str, ":", "can't pint, stack empty", NULL);
+		error_message = _strvcat("L", line_str, ":"
+		, "can't pint, stack empty", NULL);
 		_free_(line_str);
 		RAISE(error_message, EXIT_FAILURE);
 	}
@@ -53,12 +68,26 @@ int handle_pint(char **args, int *format, int lineno)
 	return (1);
 }
 
+/**
+  * handle_pall - the function name
+  * @args: parameter of type char **.
+  * @format: parameter of type int *.
+  * @lineno: parameter of type int .
+  * Return: int .
+ */
 int handle_pall(char **args, int *format, int lineno)
 {
 	print_deque(DEQUE);
 	return (1);
 }
 
+/**
+  * handle_swap - the function name
+  * @args: parameter of type char **.
+  * @format: parameter of type int *.
+  * @lineno: parameter of type int .
+  * Return: int .
+ */
 int handle_swap(char **args, int *format, int lineno)
 {
 	int tail, next_tail;
@@ -67,7 +96,8 @@ int handle_swap(char **args, int *format, int lineno)
 	if (deque_len(DEQUE) < 2)
 	{
 		line_str = _itoa(lineno);
-		error_message = _strvcat("L", line_str, ":", "can't swap, stack too short", NULL);
+		error_message = _strvcat("L", line_str, ":"
+		, "can't swap, stack too short", NULL);
 		_free_(line_str);
 		RAISE(error_message, EXIT_FAILURE);
 	}
@@ -86,6 +116,13 @@ int handle_swap(char **args, int *format, int lineno)
 	return (1);
 }
 
+/**
+  * handle_add - the function name
+  * @args: parameter of type char **.
+  * @format: parameter of type int *.
+  * @lineno: parameter of type int .
+  * Return: int .
+ */
 int handle_add(char **args, int *format, int lineno)
 {
 	int tail, next_tail, result;
@@ -94,7 +131,8 @@ int handle_add(char **args, int *format, int lineno)
 	if (deque_len(DEQUE) < 2)
 	{
 		line_str = _itoa(lineno);
-		error_message = _strvcat("L", line_str, ":", "can't add, stack too short", NULL);
+		error_message = _strvcat("L", line_str, ":"
+		, "can't add, stack too short", NULL);
 		_free_(line_str);
 		RAISE(error_message, EXIT_FAILURE);
 	}

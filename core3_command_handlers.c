@@ -1,11 +1,25 @@
 #include "main.h"
 
+/**
+  * handle_nop - the function name
+  * @args: parameter of type char **.
+  * @format: parameter of type int *.
+  * @lineno: parameter of type int .
+  * Return: int .
+ */
 int handle_nop(char **args, int *format, int lineno)
 {
 	(void)args, (void)format, (void)lineno;
 	return (1);
 }
 
+/**
+  * handle_sub - the function name
+  * @args: parameter of type char **.
+  * @format: parameter of type int *.
+  * @lineno: parameter of type int .
+  * Return: int .
+ */
 int handle_sub(char **args, int *format, int lineno)
 {
 	int tail, next_tail, result;
@@ -14,7 +28,8 @@ int handle_sub(char **args, int *format, int lineno)
 	if (deque_len(DEQUE) < 2)
 	{
 		line_str = _itoa(lineno);
-		error_message = _strvcat("L", line_str, ":", "can't sub, stack too short", NULL);
+		error_message = _strvcat("L", line_str, ":"
+		, "can't sub, stack too short", NULL);
 		_free_(line_str);
 		RAISE(error_message, EXIT_FAILURE);
 	}
@@ -26,6 +41,13 @@ int handle_sub(char **args, int *format, int lineno)
 	return (1);
 }
 
+/**
+  * handle_div - the function name
+  * @args: parameter of type char **.
+  * @format: parameter of type int *.
+  * @lineno: parameter of type int .
+  * Return: int .
+ */
 int handle_div(char **args, int *format, int lineno)
 {
 	int tail, next_tail, result;
@@ -34,7 +56,8 @@ int handle_div(char **args, int *format, int lineno)
 	if (deque_len(DEQUE) < 2)
 	{
 		line_str = _itoa(lineno);
-		error_message = _strvcat("L", line_str, ":", "can't div, stack too short", NULL);
+		error_message = _strvcat("L", line_str, ":"
+		, "can't div, stack too short", NULL);
 		_free_(line_str);
 		RAISE(error_message, EXIT_FAILURE);
 	}
@@ -54,6 +77,13 @@ int handle_div(char **args, int *format, int lineno)
 	return (1);
 }
 
+/**
+  * handle_mul - the function name
+  * @args: parameter of type char **.
+  * @format: parameter of type int *.
+  * @lineno: parameter of type int .
+  * Return: int .
+ */
 int handle_mul(char **args, int *format, int lineno)
 {
 	int tail, next_tail, result;
@@ -62,7 +92,8 @@ int handle_mul(char **args, int *format, int lineno)
 	if (deque_len(DEQUE) < 2)
 	{
 		line_str = _itoa(lineno);
-		error_message = _strvcat("L", line_str, ":", "can't mul, stack too short", NULL);
+		error_message = _strvcat("L", line_str, ":"
+		, "can't mul, stack too short", NULL);
 		_free_(line_str);
 		RAISE(error_message, EXIT_FAILURE);
 	}
@@ -74,6 +105,13 @@ int handle_mul(char **args, int *format, int lineno)
 	return (1);
 }
 
+/**
+  * handle_mod - the function name
+  * @args: parameter of type char **.
+  * @format: parameter of type int *.
+  * @lineno: parameter of type int .
+  * Return: int .
+ */
 int handle_mod(char **args, int *format, int lineno)
 {
 	int tail, next_tail, result;
@@ -82,7 +120,8 @@ int handle_mod(char **args, int *format, int lineno)
 	if (deque_len(DEQUE) < 2)
 	{
 		line_str = _itoa(lineno);
-		error_message = _strvcat("L", line_str, ":", "can't mod, stack too short", NULL);
+		error_message = _strvcat("L", line_str, ":"
+		, "can't mod, stack too short", NULL);
 		_free_(line_str);
 		RAISE(error_message, EXIT_FAILURE);
 	}

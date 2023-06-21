@@ -2,6 +2,12 @@
 
 mont_stack_t *mont_deque = NULL;
 
+/**
+ * main - the entry point into the program
+ * @argc: argument count
+ * @argv: argument vector
+ * Return: int
+ **/
 int main(int argc, char **argv)
 {
 	char *error_message;
