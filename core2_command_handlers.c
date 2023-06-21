@@ -26,9 +26,9 @@ int handle_push(char **args, int *format, int lineno)
 	push_item = atoi(push_arg);
 
 	if (*format == QUEUE_MODE)
-		enqueue_head(&deque, push_item);
+		enqueue_head(&DEQUE, push_item);
 	else if (*format == STACK_MODE)
-		enqueue_tail(&deque, push_item);
+		enqueue_tail(&DEQUE, push_item);
 
 	empty_state_buff(" \t");
 
@@ -40,22 +40,22 @@ int handle_pint(char **args, int *format, int lineno)
 	char *error_message, *line_str;
 	int i;
 
-	if (deque_empty(deque))
+	if (deque_empty(DEQUE))
 	{
 		line_str = _itoa(lineno);
 		error_message = _strvcat("L", line_str, ":", "can't pint, stack empty", NULL);
 		_free_(line_str);
 		RAISE(error_message, EXIT_FAILURE);
 	}
-	i = deque->tail;
-	i = (((i - 1) % deque->size) + deque->size) % deque->size;
-	printf("%d\n", deque->deque[i]);
+	i = DEQUE->tail;
+	i = (((i - 1) % DEQUE->size) + DEQUE->size) % DEQUE->size;
+	printf("%d\n", DEQUE->deque[i]);
 	return (1);
 }
 
 int handle_pall(char **args, int *format, int lineno)
 {
-	print_deque(deque);
+	print_deque(DEQUE);
 	return (1);
 }
 
@@ -64,7 +64,7 @@ int handle_swap(char **args, int *format, int lineno)
 	int tail, next_tail;
 	char *error_message, *line_str;
 
-	if (deque_len(deque) < 2)
+	if (deque_len(DEQUE) < 2)
 	{
 		line_str = _itoa(lineno);
 		error_message = _strvcat("L", line_str, ":", "can't swap, stack too short", NULL);
@@ -78,10 +78,10 @@ int handle_swap(char **args, int *format, int lineno)
 	 * based on the format - i haven't really thought it through
 	 * if swap gives me some bugs, then i know who the culprit is
 	*/
-	tail = dequeue_tail(deque);
-	next_tail = dequeue_tail(deque);
-	enqueue_tail(&deque, tail);
-	enqueue_tail(&deque, next_tail);
+	tail = dequeue_tail(DEQUE);
+	next_tail = dequeue_tail(DEQUE);
+	enqueue_tail(&DEQUE, tail);
+	enqueue_tail(&DEQUE, next_tail);
 
 	return (1);
 }
@@ -91,7 +91,7 @@ int handle_add(char **args, int *format, int lineno)
 	int tail, next_tail, result;
 	char *error_message, *line_str;
 
-	if (deque_len(deque) < 2)
+	if (deque_len(DEQUE) < 2)
 	{
 		line_str = _itoa(lineno);
 		error_message = _strvcat("L", line_str, ":", "can't add, stack too short", NULL);
@@ -99,9 +99,9 @@ int handle_add(char **args, int *format, int lineno)
 		RAISE(error_message, EXIT_FAILURE);
 	}
 
-	tail = dequeue_tail(deque);
-	next_tail = dequeue_tail(deque);
+	tail = dequeue_tail(DEQUE);
+	next_tail = dequeue_tail(DEQUE);
 	result = tail + next_tail;
-	enqueue_tail(&deque, result);
+	enqueue_tail(&DEQUE, result);
 	return (1);
 }

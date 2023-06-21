@@ -1,32 +1,33 @@
 #include "main.h"
 
-deque_t *deque = NULL;
+mont_stack_t *mont_deque = NULL;
 
 int main(int argc, char **argv)
 {
-	char *test_char;
-	mont_com_t *commands = NULL;
+	char *error_message;
 	int status;
 
-	// test_char = _strddup("\n\n\n\n");
-	// srch_rpl_newline(&test_char, "wee\n");
-	// printf("resulting string is :%s\n", test_char);
-	// free(test_char);
 	if (argc != 2)
 	{
-		puts("wrong argument count!");
-		exit(99);
+		error_message = _strvcat("USAGE: monty file", NULL);
+		RAISE(error_message, EXIT_FAILURE);
 	}
-	deque = create_deque(DEQ_SIZE);
-	if (!deque)
+	mont_deque = (mont_stack_t *)malloc(sizeof(mont_stack_t));
+	if (!mont_deque)
 	{
-		puts("malloc failed");
-		exit(99);
+		error_message = _strddup("Error: malloc failed");
+		RAISE(error_message, EXIT_FAILURE);
 	}
-	parse_file_lines(&commands, argv[1]);
-	status = execute_commands(commands);
+	DEQUE = create_deque(DEQ_SIZE);
+	if (!DEQUE)
+	{
+		error_message = _strddup("Error: malloc failed");
+		RAISE(error_message, EXIT_FAILURE);
+	}
+	parse_file_lines(&COMMANDS, argv[1]);
+	status = execute_commands(COMMANDS);
 
-	free_comms(&commands);
-	free_deque(&deque);
-	return (0);
+	free_comms(&COMMANDS);
+	free_deque(&DEQUE);
+	return (EXIT_SUCCESS);
 }

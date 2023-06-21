@@ -10,6 +10,8 @@
 #include "deque.h"
 
 /* USER-DEFINED MACROS */
+#define DEQUE (mont_deque->deque)
+#define COMMANDS (mont_deque->commands)
 #define BUFF_LEN 1024
 #define SENTINEL ("<monty_preserved>")
 #define STACK_MODE (1)
@@ -31,6 +33,11 @@ typedef struct
 	int (* f)(char **args, int *format, int lineno);
 } mont_opcode_t;
 
+typedef struct
+{
+	deque_t *deque;
+	mont_com_t *commands;
+} mont_stack_t;
 /* <<<<UNUSED>>>>> */
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -63,7 +70,7 @@ typedef struct instruction_s
 } instruction_t;
 /* <<<<UNUSED>>>>> */
 
-extern deque_t *deque;
+extern mont_stack_t *mont_deque;
 
 /* STRING UTILS */
 char *_strtok(char *str, char *delim);

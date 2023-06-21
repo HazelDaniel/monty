@@ -13,5 +13,10 @@ void raise_err(char *message, int status)
 
 	write(2, message, len);
 	_free_(message);
+	if (mont_deque)
+	{
+		free_comms(&COMMANDS);
+		free_deque(&DEQUE);
+	}
 	exit(status);
 }

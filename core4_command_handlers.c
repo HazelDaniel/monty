@@ -6,16 +6,16 @@ int handle_pchar(char **args, int *format, int lineno)
 	int ascii_char;
 	int i;
 
-	if (deque_empty(deque))
+	if (deque_empty(DEQUE))
 	{
 		line_str = _itoa(lineno);
 		error_message = _strvcat("L", line_str, ":", "can't pchar, stack empty", NULL);
 		_free_(line_str);
 		RAISE(error_message, EXIT_FAILURE);
 	}
-	i = deque->tail;
-	i = (((i - 1) % deque->size) + deque->size) % deque->size;
-	ascii_char = deque->deque[i];
+	i = DEQUE->tail;
+	i = (((i - 1) % DEQUE->size) + DEQUE->size) % DEQUE->size;
+	ascii_char = DEQUE->deque[i];
 	if (ascii_char > 127 || ascii_char < 0)
 	{
 		line_str = _itoa(lineno);
@@ -31,12 +31,12 @@ int handle_pchar(char **args, int *format, int lineno)
 int handle_pstr(char **args, int *format, int lineno)
 {
 	char *error_message, *line_str;
-	int ascii_char, d_len = deque_len(deque), i, x,
+	int ascii_char, d_len = deque_len(DEQUE), i, x,
 	index = 0;
 	char *result;
 
-	if (deque_empty(deque))
-		print_deque(deque);
+	if (deque_empty(DEQUE))
+		print_deque(DEQUE);
 
 	result = malloc((d_len + 1) * sizeof(char));
 	_memset(result, 0, d_len + 1);
@@ -45,16 +45,16 @@ int handle_pstr(char **args, int *format, int lineno)
 		error_message = _strddup("Error: malloc failed");
 		RAISE(error_message, EXIT_FAILURE);
 	}
-	x = deque->tail;
-	x = (((x - 1) % deque->size) + deque->size) % deque->size;
-	for (i = x; i != deque->head; i = (((i - 1) % deque->size) + deque->size) % deque->size)
+	x = DEQUE->tail;
+	x = (((x - 1) % DEQUE->size) + DEQUE->size) % DEQUE->size;
+	for (i = x; i != DEQUE->head; i = (((i - 1) % DEQUE->size) + DEQUE->size) % DEQUE->size)
 	{
-		if (deque->deque[i] <= 0 || deque->deque[i] > 127)
+		if (DEQUE->deque[i] <= 0 || DEQUE->deque[i] > 127)
 			break;
-		result[index++] = deque->deque[i];
+		result[index++] = DEQUE->deque[i];
 	}
-	if (deque->deque[i] > 0 && deque->deque[i] <= 127)
-		result[index] = deque->deque[i];
+	if (DEQUE->deque[i] > 0 && DEQUE->deque[i] <= 127)
+		result[index] = DEQUE->deque[i];
 	printf("%s\n", result);
 	_free_(result);
 
@@ -65,11 +65,11 @@ int handle_rotl(char **args, int *format, int lineno)
 {
 	int top;
 
-	if (deque_empty(deque))
+	if (deque_empty(DEQUE))
 		return (1);
 
-	top = dequeue_tail(deque);
-	enqueue_head(&deque, top);
+	top = dequeue_tail(DEQUE);
+	enqueue_head(&DEQUE, top);
 
 	return (1);
 }
@@ -78,11 +78,11 @@ int handle_rotr(char **args, int *format, int lineno)
 {
 	int bottom;
 
-	if (deque_empty(deque))
+	if (deque_empty(DEQUE))
 		return (1);
 
-	bottom = dequeue_head(deque);
-	enqueue_tail(&deque, bottom);
+	bottom = dequeue_head(DEQUE);
+	enqueue_tail(&DEQUE, bottom);
 
 	return (1);
 }

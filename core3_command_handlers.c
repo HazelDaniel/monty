@@ -11,7 +11,7 @@ int handle_sub(char **args, int *format, int lineno)
 	int tail, next_tail, result;
 	char *error_message, *line_str;
 
-	if (deque_len(deque) < 2)
+	if (deque_len(DEQUE) < 2)
 	{
 		line_str = _itoa(lineno);
 		error_message = _strvcat("L", line_str, ":", "can't sub, stack too short", NULL);
@@ -19,10 +19,10 @@ int handle_sub(char **args, int *format, int lineno)
 		RAISE(error_message, EXIT_FAILURE);
 	}
 
-	tail = dequeue_tail(deque);
-	next_tail = dequeue_tail(deque);
+	tail = dequeue_tail(DEQUE);
+	next_tail = dequeue_tail(DEQUE);
 	result = next_tail - tail;
-	enqueue_tail(&deque, result);
+	enqueue_tail(&DEQUE, result);
 	return (1);
 }
 
@@ -31,7 +31,7 @@ int handle_div(char **args, int *format, int lineno)
 	int tail, next_tail, result;
 	char *error_message, *line_str;
 
-	if (deque_len(deque) < 2)
+	if (deque_len(DEQUE) < 2)
 	{
 		line_str = _itoa(lineno);
 		error_message = _strvcat("L", line_str, ":", "can't div, stack too short", NULL);
@@ -39,8 +39,8 @@ int handle_div(char **args, int *format, int lineno)
 		RAISE(error_message, EXIT_FAILURE);
 	}
 
-	tail = dequeue_tail(deque);
-	next_tail = dequeue_tail(deque);
+	tail = dequeue_tail(DEQUE);
+	next_tail = dequeue_tail(DEQUE);
 
 	if (tail == 0)
 	{
@@ -50,7 +50,7 @@ int handle_div(char **args, int *format, int lineno)
 		RAISE(error_message, EXIT_FAILURE);
 	}
 	result = next_tail / tail;
-	enqueue_tail(&deque, result);
+	enqueue_tail(&DEQUE, result);
 	return (1);
 }
 
@@ -59,7 +59,7 @@ int handle_mul(char **args, int *format, int lineno)
 	int tail, next_tail, result;
 	char *error_message, *line_str;
 
-	if (deque_len(deque) < 2)
+	if (deque_len(DEQUE) < 2)
 	{
 		line_str = _itoa(lineno);
 		error_message = _strvcat("L", line_str, ":", "can't mul, stack too short", NULL);
@@ -67,10 +67,10 @@ int handle_mul(char **args, int *format, int lineno)
 		RAISE(error_message, EXIT_FAILURE);
 	}
 
-	tail = dequeue_tail(deque);
-	next_tail = dequeue_tail(deque);
+	tail = dequeue_tail(DEQUE);
+	next_tail = dequeue_tail(DEQUE);
 	result = next_tail * tail;
-	enqueue_tail(&deque, result);
+	enqueue_tail(&DEQUE, result);
 	return (1);
 }
 
@@ -79,7 +79,7 @@ int handle_mod(char **args, int *format, int lineno)
 	int tail, next_tail, result;
 	char *error_message, *line_str;
 
-	if (deque_len(deque) < 2)
+	if (deque_len(DEQUE) < 2)
 	{
 		line_str = _itoa(lineno);
 		error_message = _strvcat("L", line_str, ":", "can't mod, stack too short", NULL);
@@ -87,8 +87,8 @@ int handle_mod(char **args, int *format, int lineno)
 		RAISE(error_message, EXIT_FAILURE);
 	}
 
-	tail = dequeue_tail(deque);
-	next_tail = dequeue_tail(deque);
+	tail = dequeue_tail(DEQUE);
+	next_tail = dequeue_tail(DEQUE);
 
 	if (tail == 0)
 	{
@@ -98,6 +98,6 @@ int handle_mod(char **args, int *format, int lineno)
 		RAISE(error_message, EXIT_FAILURE);
 	}
 	result = next_tail % tail;
-	enqueue_tail(&deque, result);
+	enqueue_tail(&DEQUE, result);
 	return (1);
 }
