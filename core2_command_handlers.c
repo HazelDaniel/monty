@@ -144,7 +144,7 @@ int handle_swap(char **args, int *format, int lineno)
  */
 int handle_add(char **args, int *format, int lineno)
 {
-	int tail, next_tail, result;
+	int tail, next_tail, result, head, next_head;
 	char *error_message, *line_str;
 
 	(void)args, (void)format;
@@ -157,9 +157,18 @@ int handle_add(char **args, int *format, int lineno)
 		RAISE(error_message, EXIT_FAILURE);
 	}
 
-	tail = dequeue_tail(DEQUE);
-	next_tail = dequeue_tail(DEQUE);
-	result = tail + next_tail;
-	enqueue_tail(&DEQUE, result);
+	if (*format == STACK_MODE)
+	{
+		tail = dequeue_tail(DEQUE);
+		next_tail = dequeue_tail(DEQUE);
+		result = tail + next_tail;
+		enqueue_tail(&DEQUE, result);
+		return (1);
+	}
+	head = dequeue_head(DEQUE);
+	next_head = dequeue_head(DEQUE);
+	result = head + next_head;
+	enqueue_head(&DEQUE, result);
+
 	return (1);
 }
