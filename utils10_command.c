@@ -12,6 +12,7 @@ void raise_err(char *message, int status)
 	int len = _strlen(message);
 
 	write(2, message, len);
+	write(2, "\n", 1);
 	_free_(message);
 	if (mont_deque)
 	{
