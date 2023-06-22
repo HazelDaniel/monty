@@ -17,8 +17,9 @@ int handle_push(char **args, int *format, int lineno)
 	push_arg = _strtok(NULL, " \t");
 	if (!push_com || !push_arg)
 	{
-		error_message = _strddup("Error: malloc failed");
-		empty_state_buff(" \t");
+		line_str = _itoa(lineno);
+		error_message = _strvcat("L", line_str, ":", "usage: push integer", NULL);
+		_free_(line_str), empty_state_buff(" \t");
 		RAISE(error_message, EXIT_FAILURE);
 	}
 
@@ -26,8 +27,7 @@ int handle_push(char **args, int *format, int lineno)
 	{
 		line_str = _itoa(lineno);
 		error_message = _strvcat("L", line_str, ":", "usage: push integer", NULL);
-		_free_(line_str);
-		empty_state_buff(" \t");
+		_free_(line_str), empty_state_buff(" \t");
 		RAISE(error_message, EXIT_FAILURE);
 	}
 	push_item = atoi(push_arg);
