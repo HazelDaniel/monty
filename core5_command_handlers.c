@@ -29,7 +29,7 @@ int handle_pop(char **args, int *format, int lineno)
 	if (deque_empty(DEQUE))
 	{
 		line_str = _itoa(lineno);
-		error_message = _strvcat("L", line_str, ": ", "can't pop an empty stack");
+		error_message = _strvcat("L", line_str, ": ", "can't pop an empty stack", NULL);
 		_free_(line_str);
 		RAISE(error_message, EXIT_FAILURE);
 	}
