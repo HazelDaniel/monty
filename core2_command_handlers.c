@@ -63,8 +63,15 @@ int handle_pint(char **args, int *format, int lineno)
 		_free_(line_str);
 		RAISE(error_message, EXIT_FAILURE);
 	}
-	i = DEQUE->tail;
-	i = (((i - 1) % DEQUE->size) + DEQUE->size) % DEQUE->size;
+	if (*format == STACK_MODE)
+	{
+		i = DEQUE->tail;
+		i = (((i - 1) % DEQUE->size) + DEQUE->size) % DEQUE->size;
+	}
+	else
+	{
+		i = DEQUE->head;
+	}
 	printf("%d\n", DEQUE->deque[i]);
 	return (1);
 }
