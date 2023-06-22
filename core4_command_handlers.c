@@ -129,8 +129,14 @@ int handle_rotr(char **args, int *format, int lineno)
 	if (deque_empty(DEQUE))
 		return (1);
 
-	bottom = dequeue_head(DEQUE);
-	enqueue_tail(&DEQUE, bottom);
+	if (*format == STACK_MODE)
+	{
+		bottom = dequeue_head(DEQUE);
+		enqueue_tail(&DEQUE, bottom);
+		return (1);
+	}
+	bottom = dequeue_tail(DEQUE);
+	enqueue_head(&DEQUE, bottom);
 
 	return (1);
 }
