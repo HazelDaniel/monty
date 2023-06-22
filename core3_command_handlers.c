@@ -110,7 +110,7 @@ int handle_div(char **args, int *format, int lineno)
  */
 int handle_mul(char **args, int *format, int lineno)
 {
-	int tail, next_tail, result;
+	int tail, next_tail, result, head, next_head;
 	char *error_message, *line_str;
 
 	(void)args, (void)format;
@@ -123,10 +123,18 @@ int handle_mul(char **args, int *format, int lineno)
 		RAISE(error_message, EXIT_FAILURE);
 	}
 
-	tail = dequeue_tail(DEQUE);
-	next_tail = dequeue_tail(DEQUE);
-	result = next_tail * tail;
-	enqueue_tail(&DEQUE, result);
+	if (*format == STACK_MODE)
+	{
+		tail = dequeue_tail(DEQUE);
+		next_tail = dequeue_tail(DEQUE);
+		result = next_tail * tail;
+		enqueue_tail(&DEQUE, result);
+		return (1);
+	}
+	head = dequeue_head(DEQUE);
+	next_head = dequeue_head(DEQUE);
+	result = next_head * head;
+	enqueue_head(&DEQUE, result);
 	return (1);
 }
 
@@ -139,7 +147,7 @@ int handle_mul(char **args, int *format, int lineno)
  */
 int handle_mod(char **args, int *format, int lineno)
 {
-	int tail, next_tail, result;
+	int tail, next_tail, result, head, next_head;
 	char *error_message, *line_str;
 
 	(void)args, (void)format;
@@ -152,17 +160,30 @@ int handle_mod(char **args, int *format, int lineno)
 		RAISE(error_message, EXIT_FAILURE);
 	}
 
-	tail = dequeue_tail(DEQUE);
-	next_tail = dequeue_tail(DEQUE);
-
-	if (tail == 0)
+	if (*format == STACK_MODE)
+	{
+		tail = dequeue_tail(DEQUE);
+		next_tail = dequeue_tail(DEQUE);
+		if (tail == 0)
+		{
+			line_str = _itoa(lineno);
+			error_message = _strvcat("L", line_str, ":", "division by zero", NULL);
+			_free_(line_str), RAISE(error_message, EXIT_FAILURE);
+		}
+		result = next_tail % tail;
+		enqueue_tail(&DEQUE, result);
+		return (1);
+	}
+	head = dequeue_head(DEQUE);
+	next_head = dequeue_head(DEQUE);
+	if (head == 0)
 	{
 		line_str = _itoa(lineno);
 		error_message = _strvcat("L", line_str, ":", "division by zero", NULL);
-		_free_(line_str);
-		RAISE(error_message, EXIT_FAILURE);
+		_free_(line_str), RAISE(error_message, EXIT_FAILURE);
 	}
-	result = next_tail % tail;
-	enqueue_tail(&DEQUE, result);
+	result = next_head % head;
+	enqueue_head(&DEQUE, result);
+
 	return (1);
 }
