@@ -34,6 +34,11 @@ int handle_pop(char **args, int *format, int lineno)
 		RAISE(error_message, EXIT_FAILURE);
 	}
 
-	(void)dequeue_tail(DEQUE);
+	if (*format == STACK_MODE)
+	{
+		(void)dequeue_tail(DEQUE);
+		return (1);
+	}
+	dequeue_head(DEQUE);
 	return (1);
 }
