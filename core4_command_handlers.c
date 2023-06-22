@@ -22,8 +22,15 @@ int handle_pchar(char **args, int *format, int lineno)
 		_free_(line_str);
 		RAISE(error_message, EXIT_FAILURE);
 	}
-	i = DEQUE->tail;
-	i = (((i - 1) % DEQUE->size) + DEQUE->size) % DEQUE->size;
+	if (*format == STACK_MODE)
+	{
+		i = DEQUE->tail;
+		i = (((i - 1) % DEQUE->size) + DEQUE->size) % DEQUE->size;
+	}
+	else
+	{
+		i = DEQUE->head;
+	}
 	ascii_char = DEQUE->deque[i];
 	if (ascii_char > 127 || ascii_char < 0)
 	{
@@ -95,8 +102,14 @@ int handle_rotl(char **args, int *format, int lineno)
 	if (deque_empty(DEQUE))
 		return (1);
 
-	top = dequeue_tail(DEQUE);
-	enqueue_head(&DEQUE, top);
+	if (*format == STACK_MODE)
+	{
+		top = dequeue_tail(DEQUE);
+		enqueue_head(&DEQUE, top);
+		return (1);
+	}
+	top = dequeue_head(DEQUE);
+	enqueue_tail(&DEQUE, top);
 
 	return (1);
 }
