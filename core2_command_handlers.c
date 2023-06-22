@@ -99,7 +99,7 @@ int handle_pall(char **args, int *format, int lineno)
  */
 int handle_swap(char **args, int *format, int lineno)
 {
-	int tail, next_tail;
+	int tail, next_tail, head, next_head;
 	char *error_message, *line_str;
 
 	(void)args, (void)format;
@@ -117,11 +117,20 @@ int handle_swap(char **args, int *format, int lineno)
 	 * i am still having misgivings for not swaping
 	 * based on the format - i haven't really thought it through
 	 * if swap gives me some bugs, then i know who the culprit is
+	 * update - just did
 	*/
-	tail = dequeue_tail(DEQUE);
-	next_tail = dequeue_tail(DEQUE);
-	enqueue_tail(&DEQUE, tail);
-	enqueue_tail(&DEQUE, next_tail);
+	if (*format == STACK_MODE)
+	{
+		tail = dequeue_tail(DEQUE);
+		next_tail = dequeue_tail(DEQUE);
+		enqueue_tail(&DEQUE, tail);
+		enqueue_tail(&DEQUE, next_tail);
+		return (1);
+	}
+	head = dequeue_head(DEQUE);
+	next_head = dequeue_head(DEQUE);
+	enqueue_head(&DEQUE, head);
+	enqueue_head(&DEQUE, next_head);
 
 	return (1);
 }
