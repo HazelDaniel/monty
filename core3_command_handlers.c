@@ -29,7 +29,7 @@ int handle_sub(char **args, int *format, int lineno)
 	if (deque_len(DEQUE) < 2)
 	{
 		line_str = _itoa(lineno);
-		error_message = _strvcat("L", line_str, ":"
+		error_message = _strvcat("L", line_str, ": "
 		, "can't sub, stack too short", NULL);
 		_free_(line_str);
 		RAISE(error_message, EXIT_FAILURE);
@@ -67,7 +67,7 @@ int handle_div(char **args, int *format, int lineno)
 	if (deque_len(DEQUE) < 2)
 	{
 		line_str = _itoa(lineno);
-		error_message = _strvcat("L", line_str, ":"
+		error_message = _strvcat("L", line_str, ": "
 		, "can't div, stack too short", NULL);
 		_free_(line_str);
 		RAISE(error_message, EXIT_FAILURE);
@@ -81,7 +81,7 @@ int handle_div(char **args, int *format, int lineno)
 		if (tail == 0)
 		{
 			line_str = _itoa(lineno);
-			error_message = _strvcat("L", line_str, ":", "division by zero", NULL);
+			error_message = _strvcat("L", line_str, ": ", "division by zero", NULL);
 			_free_(line_str), RAISE(error_message, EXIT_FAILURE);
 		}
 		result = next_tail / tail;
@@ -93,7 +93,7 @@ int handle_div(char **args, int *format, int lineno)
 	if (head == 0)
 	{
 		line_str = _itoa(lineno);
-		error_message = _strvcat("L", line_str, ":", "division by zero", NULL);
+		error_message = _strvcat("L", line_str, ": ", "division by zero", NULL);
 		_free_(line_str), RAISE(error_message, EXIT_FAILURE);
 	}
 	result = next_head / head;
@@ -117,7 +117,7 @@ int handle_mul(char **args, int *format, int lineno)
 	if (deque_len(DEQUE) < 2)
 	{
 		line_str = _itoa(lineno);
-		error_message = _strvcat("L", line_str, ":"
+		error_message = _strvcat("L", line_str, ": "
 		, "can't mul, stack too short", NULL);
 		_free_(line_str);
 		RAISE(error_message, EXIT_FAILURE);
@@ -154,7 +154,7 @@ int handle_mod(char **args, int *format, int lineno)
 	if (deque_len(DEQUE) < 2)
 	{
 		line_str = _itoa(lineno);
-		error_message = _strvcat("L", line_str, ":"
+		error_message = _strvcat("L", line_str, ": "
 		, "can't mod, stack too short", NULL);
 		_free_(line_str);
 		RAISE(error_message, EXIT_FAILURE);
@@ -167,7 +167,7 @@ int handle_mod(char **args, int *format, int lineno)
 		if (tail == 0)
 		{
 			line_str = _itoa(lineno);
-			error_message = _strvcat("L", line_str, ":", "division by zero", NULL);
+			error_message = _strvcat("L", line_str, ": ", "division by zero", NULL);
 			_free_(line_str), RAISE(error_message, EXIT_FAILURE);
 		}
 		result = next_tail % tail;
@@ -179,7 +179,7 @@ int handle_mod(char **args, int *format, int lineno)
 	if (head == 0)
 	{
 		line_str = _itoa(lineno);
-		error_message = _strvcat("L", line_str, ":", "division by zero", NULL);
+		error_message = _strvcat("L", line_str, ": ", "division by zero", NULL);
 		_free_(line_str), RAISE(error_message, EXIT_FAILURE);
 	}
 	result = next_head % head;

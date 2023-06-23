@@ -17,7 +17,7 @@ int handle_pchar(char **args, int *format, int lineno)
 	if (deque_empty(DEQUE))
 	{
 		line_str = _itoa(lineno);
-		error_message = _strvcat("L", line_str, ":"
+		error_message = _strvcat("L", line_str, ": "
 		, "can't pchar, stack empty", NULL);
 		_free_(line_str);
 		RAISE(error_message, EXIT_FAILURE);
@@ -35,7 +35,7 @@ int handle_pchar(char **args, int *format, int lineno)
 	if (ascii_char > 127 || ascii_char < 0)
 	{
 		line_str = _itoa(lineno);
-		error_message = _strvcat("L", line_str, ":"
+		error_message = _strvcat("L", line_str, ": "
 		, "can't pchar, value out of range", NULL);
 		_free_(line_str);
 		RAISE(error_message, EXIT_FAILURE);

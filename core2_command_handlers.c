@@ -18,7 +18,7 @@ int handle_push(char **args, int *format, int lineno)
 	if (!push_com || !push_arg)
 	{
 		line_str = _itoa(lineno);
-		error_message = _strvcat("L", line_str, ":", "usage: push integer", NULL);
+		error_message = _strvcat("L", line_str, ": ", "usage: push integer", NULL);
 		_free_(line_str), empty_state_buff(" \t");
 		RAISE(error_message, EXIT_FAILURE);
 	}
@@ -26,7 +26,7 @@ int handle_push(char **args, int *format, int lineno)
 	if (!is_num_str(push_arg))
 	{
 		line_str = _itoa(lineno);
-		error_message = _strvcat("L", line_str, ":", "usage: push integer", NULL);
+		error_message = _strvcat("L", line_str, ": ", "usage: push integer", NULL);
 		_free_(line_str), empty_state_buff(" \t");
 		RAISE(error_message, EXIT_FAILURE);
 	}
@@ -58,7 +58,7 @@ int handle_pint(char **args, int *format, int lineno)
 	if (deque_empty(DEQUE))
 	{
 		line_str = _itoa(lineno);
-		error_message = _strvcat("L", line_str, ":"
+		error_message = _strvcat("L", line_str, ": "
 		, "can't pint, stack empty", NULL);
 		_free_(line_str);
 		RAISE(error_message, EXIT_FAILURE);
@@ -106,7 +106,7 @@ int handle_swap(char **args, int *format, int lineno)
 	if (deque_len(DEQUE) < 2)
 	{
 		line_str = _itoa(lineno);
-		error_message = _strvcat("L", line_str, ":"
+		error_message = _strvcat("L", line_str, ": "
 		, "can't swap, stack too short", NULL);
 		_free_(line_str);
 		RAISE(error_message, EXIT_FAILURE);
@@ -151,7 +151,7 @@ int handle_add(char **args, int *format, int lineno)
 	if (deque_len(DEQUE) < 2)
 	{
 		line_str = _itoa(lineno);
-		error_message = _strvcat("L", line_str, ":"
+		error_message = _strvcat("L", line_str, ": "
 		, "can't add, stack too short", NULL);
 		_free_(line_str);
 		RAISE(error_message, EXIT_FAILURE);
