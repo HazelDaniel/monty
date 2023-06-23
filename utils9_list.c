@@ -35,7 +35,7 @@ int execute_commands(mont_com_t *list)
 			if (i != -1)
 				opcode[i + 1] = '\0';
 
-			error_message = _strvcat("L", line_str, ":"
+			error_message = _strvcat("L", line_str, ": "
 			, "unknown instruction ", opcode, NULL);
 			_free_(line_str), _free_(opcode);
 			RAISE(error_message, EXIT_FAILURE);
